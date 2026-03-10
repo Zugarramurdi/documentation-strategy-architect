@@ -17,8 +17,13 @@ Detecta cambios estructurales y propone la creación de **Architecture Decision 
 ### 📊 Documentación Viva (C4 Model)
 Mantiene la visión global del sistema. Si añades servicios o cambias flujos de datos, la skill genera o actualiza diagramas **Mermaid.js** basados en el estándar **C4 Model** (Nivel 2/3).
 
+### 🛡️ Seguridad y Robustez (Security First)
+* **Zero Leak Policy:** Monitorea cambios en variables de entorno. Nunca documenta secretos reales; genera automáticamente archivos `.env.example` con valores ficticios.
+* **Flexibilidad Visual:** No se limita a C4. Prioriza **Diagramas de Secuencia o Estado** para lógicas de negocio complejas cuando aportan más claridad.
+
 ### 🛠️ Excelencia en Git (Conventional Commits)
 * Genera mensajes bajo el estándar **Conventional Commits** (feat, fix, perf, refactor).
+* **Commits Atómicos:** Si detecta un commit que mezcla lógicas distintas (ej: fix + feat) o es demasiado grande, sugerirá dividirlo antes de proceder.
 * Vincula automáticamente los commits con sus respectivos ADRs (Ref: ADR-XXX).
 * Redacta descripciones de Pull Request con impacto técnico y guía de pruebas.
 
@@ -39,9 +44,9 @@ Si utilizas el CLI de skills.sh, puedes añadir esta habilidad a tu agente local
 
 La skill opera en tres fases para garantizar que siempre tengas el control total:
 
-1.  **Observación:** Analiza los cambios en tu *staging area* o sesión actual.
-2.  **Dry Run (Validación):** Te presenta un resumen de los ADRs y cambios documentales **antes** de escribirlos en disco. Validarás los trade-offs aquí.
-3.  **Ejecución:** Tras tu confirmación (Sí), persiste los archivos .md y prepara los comandos de Git.
+1.  **Observación:** Analiza los cambios en tu *staging area*, busca posibles fallos de seguridad o mezclas de lógica (anti-patterns).
+2.  **Dry Run (Validación):** Te presenta un resumen de los ADRs, diagramas y la **Guía de Pruebas** antes de escribirlos.
+3.  **Ejecución:** Tras tu confirmación, persiste los archivos o usa el **Modo Fallback** (genera el código con la ruta comentada si no hay permisos de escritura).
 
 ---
 
@@ -50,11 +55,13 @@ La skill opera en tres fases para garantizar que siempre tengas el control total
 **Contexto:** Has optimizado un fetch de datos en el Dashboard para evitar un problema de N+1.
 
 **Salida de la Skill:**
-> "He detectado una migración de *Client Fetching* a *Bulk Data Fetching* en el Server Component.
+> "He detectado una migración a *Bulk Data Fetching* y una nueva variable de configuración. He actualizado `.env.example` con valores genéricos.
 > 
 > **ADR-001 Propuesto:**
-> - **Positivo:** Reducción del 95% en carga HTTP.
-> - **Negativo:** Aumento del acoplamiento entre la página padre y el componente AddToListButton.
+> - **Trade-off:** Reducción del 95% en carga HTTP vs Aumento de acoplamiento.
+> 
+> **Cómo Probar:** > 1. Configurar la clave en el .env local. 
+> 2. Verificar en la pestaña Network que solo se realiza una petición.
 > 
 > **Commit Sugerido:**
 > (git commit -m "perf(wishlist): migrate to bulk data fetching. Ref: ADR-001")"
@@ -67,7 +74,8 @@ La skill organiza el conocimiento de tu repositorio de forma estandarizada:
 
 * /docs/adr/: Registro histórico de decisiones técnicas.
 * /docs/changelog/: Diario técnico incremental (no solo de versión, sino de lógica).
-* /docs/architecture.md/: Diagramas visuales en Mermaid.
+* `/docs/architecture/`: Diagramas visuales (C4, Secuencia, Estados).
+* `.env.example`: Plantilla segura de configuraciones del proyecto.
 
 ---
 
