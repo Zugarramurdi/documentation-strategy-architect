@@ -13,6 +13,7 @@ Detecta cambios estructurales y propone la creación de **Architecture Decision 
 * **Contexto de negocio:** Justifica el cambio frente a necesidades del producto.
 * **Trade-offs técnicos:** Identifica honestamente lo que ganamos vs. lo que sacrificamos (acoplamiento, complejidad, latencia).
 * **Impacto a largo plazo:** Evalúa la mantenibilidad futura.
+* **Reader Testing (Onboarding Friendly):** Actúa como un filtro de legibilidad. La skill detecta "conocimiento tribal" o asunciones complejas y añade aclaraciones para que cualquier desarrollador nuevo entienda la documentación sin ayuda externa.
 
 ### 📊 Documentación Viva (C4 Model)
 Mantiene la visión global del sistema. Si añades servicios o cambias flujos de datos, la skill genera o actualiza diagramas **Mermaid.js** basados en el estándar **C4 Model** (Nivel 2/3).
@@ -45,26 +46,29 @@ Si utilizas el CLI de skills.sh, puedes añadir esta habilidad a tu agente local
 La skill opera en tres fases para garantizar que siempre tengas el control total:
 
 1.  **Observación:** Analiza los cambios en tu *staging area*, busca posibles fallos de seguridad o mezclas de lógica (anti-patterns).
-2.  **Dry Run (Validación):** Te presenta un resumen de los ADRs, diagramas y la **Guía de Pruebas** antes de escribirlos.
+2.  **Dry Run (Validación):** Te presenta un resumen de los ADRs, diagramas y la **Guía de Pruebas**. En este paso, aplica el **Reader Testing** para asegurar que el contenido sea auto-explicativo.
 3.  **Ejecución:** Tras tu confirmación, persiste los archivos o usa el **Modo Fallback** (genera el código con la ruta comentada si no hay permisos de escritura).
 
 ---
 
 ## 📖 Ejemplo de Uso Real
 
-**Contexto:** Has optimizado un fetch de datos en el Dashboard para evitar un problema de N+1.
+**Contexto:** Has optimizado un fetch de datos en el Dashboard para evitar un problema de N+1 y has añadido una variable de entorno para la API Key.
 
 **Salida de la Skill:**
-> "He detectado una migración a *Bulk Data Fetching* y una nueva variable de configuración. He actualizado `.env.example` con valores genéricos.
+> "He detectado una migración a *Bulk Data Fetching* y una nueva configuración de entorno. He actualizado el `.env.example` con valores ficticios para proteger tus secretos.
 > 
 > **ADR-001 Propuesto:**
-> - **Trade-off:** Reducción del 95% en carga HTTP vs Aumento de acoplamiento.
+> - **Decisión:** Implementación de Fetching Masivo en Dashboard.
+> - **Trade-off:** Reducción del 95% en carga HTTP vs. aumento del acoplamiento en componentes padre.
 > 
-> **Cómo Probar:** > 1. Configurar la clave en el .env local. 
-> 2. Verificar en la pestaña Network que solo se realiza una petición.
+> **👥 Reader Testing:** He añadido una nota aclaratoria sobre el origen de la `DASHBOARD_API_KEY` para que un desarrollador nuevo sepa que debe solicitarla al equipo de Infraestructura, evitando 'conocimiento tribal'.
 > 
-> **Commit Sugerido:**
-> (git commit -m "perf(wishlist): migrate to bulk data fetching. Ref: ADR-001")"
+> **Cómo Probar:** > 1. Configurar la clave ficticia en el `.env` local. 
+> 2. Abrir la pestaña *Network* y verificar que solo se realiza una petición al cargar el Dashboard.
+> 
+> **Commit Sugerido (Anti-Pattern Check: OK):**
+> (git commit -m "perf(dashboard): migrate to bulk data fetching to fix N+1. Ref: ADR-001")"
 
 ---
 

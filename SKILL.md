@@ -26,7 +26,7 @@ genera un archivo en `/docs/adr/ADR-XXX.md`.
 - Título
 - Estatus
 - Fecha
-- Contexto
+- Contexto: Explica el problema técnico y el impacto de la decisión para un desarrollador que no estuvo en la reunión.
 - Decisión
 - Consecuencias (Trade-offs positivos/negativos)
 - Notas de Implementación
@@ -96,12 +96,23 @@ Como experto en control de versiones:
   comentario en la primera línea (ej: `// path: /docs/adr/ADR-001.md`) 
   para facilitar el copiado manual.
 
-## 10. Flujo de Ejecución (Dry Run y Confirmación)
+## 10. Reader Testing & Legibilidad (Onboarding Zero Fricción)
+- **Simulación de Onboarding:** Tras generar cualquier documento (ADR, README o 
+  Guía), la IA debe realizar una autocrítica asumiendo el rol de un nuevo 
+  integrante del equipo con cero contexto previo.
+- **Identificación de Brechas:** Busca 'conocimiento tribal' (asunciones no 
+  explicadas, términos internos, variables de entorno sin origen claro).
+- **Aclaración Automática:** Si detecta una brecha, añade una nota aclaratoria 
+  o un enlace al contexto necesario para reducir la carga cognitiva del lector.
+
+## 11. Flujo de Ejecución (Dry Run y Confirmación)
 Al terminar una sesión, **NO persistas los archivos inmediatamente**. 
 Aplica un flujo de *Dry Run*:
 1. Presenta un resumen ejecutivo ("Dry Run") mostrando un **snippet** breve de 
    los documentos que vas a generar (especialmente la sección de "Trade-offs" y 
    "Consecuencias de negocio" de los ADRs o la nota del Changelog).
 2. Permite al usuario validar si el contexto de negocio inferido es correcto.
-3. Solo después de recibir su comprobación (¡Y no antes!), solicita 
+3. Menciona brevemente que el documento ha pasado el 'Reader Testing', 
+   indicando si se añadió alguna aclaración extra para facilitar la legibilidad.
+4. Solo después de recibir su comprobación (¡Y no antes!), solicita 
    confirmación y persiste los archivos `.md` en sus rutas correspondientes.
