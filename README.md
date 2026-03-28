@@ -1,6 +1,9 @@
 # Senior Doc Architect 🏛️
 
-**Senior Doc Architect** es una skill de IA diseñada para operar como un **Staff Software Engineer** en tu entorno de desarrollo. Su misión es eliminar la "burocracia técnica" automatizando la creación de documentación de arquitectura, registros de decisiones (ADR) y mensajes de commit de alta calidad.
+![Version](https://img.shields.io/badge/version-1.3.0-blue)
+![Skills.sh](https://img.shields.io/badge/skills.sh-compatible-brightgreen)
+
+**Senior Doc Architect** es una skill de IA que actúa como un **Staff Software Engineer** en tu entorno de desarrollo. Su misión es eliminar la "burocracia técnica" automatizando toda la documentación de un proyecto — desde decisiones de arquitectura hasta guías operacionales — sin que tengas que pedírselo explícitamente.
 
 > "El código dice *qué*, pero esta skill explica el *por qué*."
 
@@ -8,84 +11,121 @@
 
 ## ✨ Características Principales
 
-### 🧠 Mentalidad de Arquitecto (ADR)
-Detecta cambios estructurales y propone la creación de **Architecture Decision Records (ADR)** siguiendo la plantilla de Michael Nygard. Analiza automáticamente:
-* **Contexto de negocio:** Justifica el cambio frente a necesidades del producto.
-* **Trade-offs técnicos:** Identifica honestamente lo que ganamos vs. lo que sacrificamos (acoplamiento, complejidad, latencia).
-* **Impacto a largo plazo:** Evalúa la mantenibilidad futura.
-* **Reader Testing (Onboarding Friendly):** Actúa como un filtro de legibilidad. La skill detecta "conocimiento tribal" o asunciones complejas y añade aclaraciones para que cualquier desarrollador nuevo entienda la documentación sin ayuda externa.
+### 🔍 Detección Proactiva de Documentación
+No espera a que le pidas nada. Analiza la conversación y los cambios que le compartas (`git diff`, `git log`) y te presenta los documentos que podrían necesitarse:
 
-### 📊 Documentación Viva (C4 Model)
-Mantiene la visión global del sistema. Si añades servicios o cambias flujos de datos, la skill genera o actualiza diagramas **Mermaid.js** basados en el estándar **C4 Model** (Nivel 2/3).
+| Tipo | Cuándo lo detecta |
+|------|-------------------|
+| **ADR** | Nueva librería, cambio de BD, patrón arquitectónico nuevo |
+| **RFC** | Debate abierto sin decisión tomada aún |
+| **Runbook / Playbook** | Cambios en infra, menciones a on-call o rollback |
+| **Decision Log** | Micro-decisiones reversibles que no merecen ADR |
+| **Threat Model** | Nuevos módulos de auth, datos sensibles, APIs públicas |
+| **Data Architecture Doc** | Migraciones de schema, nuevas entidades, contratos de datos |
+| **PostMortem** | Incidentes, hotfixes críticos, "qué salió mal" |
+| **Glosario técnico** | Términos de negocio o acrónimos sin definir |
+| **Changelog** | Cualquier cambio funcional o arquitectónico |
+| **Diagramas C4 / Secuencia / Estado** | Nuevos servicios, módulos o flujos complejos |
 
-### 🛡️ Seguridad y Robustez (Security First)
-* **Zero Leak Policy:** Monitorea cambios en variables de entorno. Nunca documenta secretos reales; genera automáticamente archivos `.env.example` con valores ficticios.
-* **Flexibilidad Visual:** No se limita a C4. Prioriza **Diagramas de Secuencia o Estado** para lógicas de negocio complejas cuando aportan más claridad.
+Detecta, te presenta la lista y te pregunta cuáles quieres generar. El control siempre es tuyo.
+
+### 🧠 Documentos Completos, no Esqueletos
+Ningún `[insertar aquí]`. Cada documento se genera con contenido real inferido del contexto. Si le falta información para una sección, te la pregunta antes de escribir.
+
+### 👥 Documentación para Todos los Perfiles
+El Dry Run genera por defecto la versión técnica para desarrolladores. Al final, te pregunta si quieres ampliar:
+- **Dev nuevo** — contexto de setup, stack y cómo reproducir localmente
+- **Dev senior / revisor** — trade-offs expandidos, alternativas descartadas, edge cases
+- **Stakeholder no técnico** — qué se decidió, por qué importa al negocio, qué cambia para el usuario
+
+Cada perfil se añade como sección extra al documento base, sin duplicar contenido.
+
+### 🛡️ Seguridad y Autoría
+- **Zero Leak Policy:** Nunca documenta secretos reales. `.env.example` siempre con valores ficticios.
+- **Política de Autoría configurable:** Antes de guardar el primer fichero de la sesión, elige cómo firmar los documentos:
+  - `A)` `Autor: [tu nombre] (asistido por IA)` — trazabilidad completa
+  - `B)` `Autor: [tu nombre]` — firma limpia
+  - `C)` Sin campo de autoría
 
 ### 🛠️ Excelencia en Git (Conventional Commits)
-* Genera mensajes bajo el estándar **Conventional Commits** (feat, fix, perf, refactor).
-* **Commits Atómicos:** Si detecta un commit que mezcla lógicas distintas (ej: fix + feat) o es demasiado grande, sugerirá dividirlo antes de proceder.
-* Vincula automáticamente los commits con sus respectivos ADRs (Ref: ADR-XXX).
-* Redacta descripciones de Pull Request con impacto técnico y guía de pruebas.
+- Genera mensajes bajo el estándar **Conventional Commits** (`feat`, `fix`, `perf`, `refactor`...).
+- Detecta commits que mezclan lógicas distintas y sugiere dividirlos.
+- Vincula commits con sus ADRs de forma condicional — solo si el fichero ya existe en el repo.
+- Siempre en el idioma que usa tu historial de commits. Si es mixto, te da las dos opciones.
 
-### 🚀 DevEx & Onboarding
-Monitoriza cambios en .env.example, package.json o Dockerfile y mantiene actualizado el CONTRIBUTING.md para que el setup de nuevos desarrolladores sea siempre funcional.
+### 🚀 Onboarding & DevEx
+Cuando le compartes cambios en `.env.example`, `package.json` o `Dockerfile`, actualiza el `CONTRIBUTING.md` para que cualquier dev nuevo pueda arrancar el proyecto sin preguntar a nadie.
 
 ---
 
 ## 🛠️ Instalación
 
-Si utilizas el CLI de skills.sh, puedes añadir esta habilidad a tu agente local:
-
-```npx skills add https://github.com/Zugarramurdi/senior-doc-architect```
+```bash
+npx skills add https://github.com/Zugarramurdi/senior-doc-architect
+```
 
 ---
 
-## 📋 Flujo de Trabajo (Workflow)
+## 🔄 Mantenerla Actualizada
 
-El **Dry Run es invariante y siempre activo** (§0 de la skill): antes de persistir cualquier artefacto, la skill te muestra un resumen para que valides el contexto. El flujo opera en tres fases:
+Esta skill se actualiza con nuevas funcionalidades. Como `skills.sh` no gestiona versiones automáticamente, puedes comprobar la versión actual en el badge de arriba y volver a ejecutar el comando de instalación cuando veas una versión superior:
 
-1.  **Observación:** Analiza los cambios en tu *staging area*, busca posibles fallos de seguridad o mezclas de lógica (anti-patterns).
-2.  **Dry Run (§0 — Siempre Activo):** Presenta un snippet ejecutivo de los ADRs, diagramas y la **Guía de Pruebas** antes de escribir nada. Aplica el **Reader Testing** al borrador para asegurar que el contenido sea auto-explicativo. Espera tu confirmación.
-3.  **Ejecución:** Tras tu confirmación, persiste los archivos o usa el **Modo Fallback** (genera el código con la ruta comentada si no hay permisos de escritura).
+```bash
+npx skills add https://github.com/Zugarramurdi/senior-doc-architect
+```
+
+Reinstalar sobreescribe la versión anterior con la más reciente.
+
+---
+
+## 📋 Flujo de Trabajo
+
+La skill opera siempre con el mismo protocolo — el **Dry Run es invariante**:
+
+1. **Detección:** Analiza la conversación y los cambios compartidos. Identifica qué documentos podrían necesitarse y te presenta la lista.
+2. **Dry Run:** Antes de escribir nada, muestra un resumen ejecutivo de lo que va a generar. Aplica *Reader Testing* al borrador para detectar conocimiento tribal o asunciones no explicadas. Te pregunta si quieres ampliar para algún perfil de audiencia.
+3. **Confirmación:** Solo después de que lo apruebes, persiste los ficheros. Si no tienes permisos de escritura, genera los bloques de código con la ruta comentada para que puedas copiarlos manualmente.
 
 ---
 
 ## 📖 Ejemplo de Uso Real
 
-**Contexto:** Has optimizado un fetch de datos en el Dashboard para evitar un problema de N+1 y has añadido una variable de entorno para la API Key.
+**Contexto:** Estás migrando a PostgreSQL y mencionas que aún no habéis decidido si usar un ORM.
 
-**Salida de la Skill:**
-> "He detectado una migración a *Bulk Data Fetching* y una nueva configuración de entorno. He actualizado el `.env.example` con valores ficticios para proteger tus secretos.
-> 
-> **ADR-001 Propuesto:**
-> - **Decisión:** Implementación de Fetching Masivo en Dashboard.
-> - **Trade-off:** Reducción del 95% en carga HTTP vs. aumento del acoplamiento en componentes padre.
-> 
-> **👥 Reader Testing:** He añadido una nota aclaratoria sobre el origen de la `DASHBOARD_API_KEY` para que un desarrollador nuevo sepa que debe solicitarla al equipo de Infraestructura, evitando 'conocimiento tribal'.
-> 
-> **Cómo Probar:** > 1. Configurar la clave ficticia en el `.env` local. 
-> 2. Abrir la pestaña *Network* y verificar que solo se realiza una petición al cargar el Dashboard.
-> 
-> **Commit Sugerido (Anti-Pattern Check: OK):**
-> (git commit -m "perf(dashboard): migrate to bulk data fetching to fix N+1. Ref: ADR-001")"
+**Lo que hace la skill:**
+> "He detectado que podrían necesitarse estos documentos:
+> - **RFC-001** — Todavía estáis debatiendo el ORM. Os propongo documentar las opciones antes de decidir.
+> - **ADR-001** — Para la migración a PostgreSQL una vez se tome la decisión.
+> - **Data Architecture Doc** — El cambio afecta al modelo de datos.
+>
+> ¿Cuáles generamos? ¿O prefieres que los genere todos?"
+
+Tras tu confirmación, el Dry Run muestra el borrador del RFC con las opciones, trade-offs y preguntas abiertas. Si quieres, amplía la sección de trade-offs para que un stakeholder no técnico pueda entender el impacto sin conocer SQL.
 
 ---
 
 ## 📂 Estructura Generada
 
-La skill organiza el conocimiento de tu repositorio de forma estandarizada:
-
-* /docs/adr/: Registro histórico de decisiones técnicas.
-* /docs/changelog/: Diario técnico incremental (no solo de versión, sino de lógica).
-* `/docs/architecture/`: Diagramas visuales (C4, Secuencia, Estados).
-* `.env.example`: Plantilla segura de configuraciones del proyecto.
+```
+/docs/
+├── adr/                  → Decisiones técnicas ya tomadas (plantilla Nygard)
+├── rfc/                  → Propuestas abiertas antes de decidir
+├── changelog/            → Diario técnico incremental por tarea
+├── architecture/         → Diagramas C4, Secuencia, Estado (Mermaid.js)
+├── ops/                  → Runbooks y Playbooks operacionales
+├── security/             → Threat Models
+├── data/                 → Documentación de arquitectura de datos
+├── incidents/            → PostMortems y registros de incidentes
+└── GLOSSARY.md           → Glosario de términos de dominio
+.env.example              → Plantilla segura de configuración
+CONTRIBUTING.md           → Guía de onboarding siempre actualizada
+```
 
 ---
 
 ## 🤝 Contribuciones
 
-Si quieres mejorar las plantillas de documentación o añadir soporte para un stack específico (Java, Rust, Go, etc.), los Pull Requests son bienvenidos.
+Si quieres mejorar las plantillas, añadir soporte para un stack específico o proponer nuevos tipos de documentación, los Pull Requests son bienvenidos.
 
 ---
 
