@@ -43,10 +43,10 @@ Si utilizas el CLI de skills.sh, puedes añadir esta habilidad a tu agente local
 
 ## 📋 Flujo de Trabajo (Workflow)
 
-La skill opera en tres fases para garantizar que siempre tengas el control total:
+El **Dry Run es invariante y siempre activo** (§0 de la skill): antes de persistir cualquier artefacto, la skill te muestra un resumen para que valides el contexto. El flujo opera en tres fases:
 
 1.  **Observación:** Analiza los cambios en tu *staging area*, busca posibles fallos de seguridad o mezclas de lógica (anti-patterns).
-2.  **Dry Run (Validación):** Te presenta un resumen de los ADRs, diagramas y la **Guía de Pruebas**. En este paso, aplica el **Reader Testing** para asegurar que el contenido sea auto-explicativo.
+2.  **Dry Run (§0 — Siempre Activo):** Presenta un snippet ejecutivo de los ADRs, diagramas y la **Guía de Pruebas** antes de escribir nada. Aplica el **Reader Testing** al borrador para asegurar que el contenido sea auto-explicativo. Espera tu confirmación.
 3.  **Ejecución:** Tras tu confirmación, persiste los archivos o usa el **Modo Fallback** (genera el código con la ruta comentada si no hay permisos de escritura).
 
 ---
