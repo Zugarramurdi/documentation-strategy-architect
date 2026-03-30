@@ -1,9 +1,9 @@
-# Senior Doc Architect 🏛️
+# Documentation Strategy & Information Architect 🏛️
 
 ![Version](https://img.shields.io/badge/version-1.3.0-blue)
 ![Skills.sh](https://img.shields.io/badge/skills.sh-compatible-brightgreen)
 
-**Senior Doc Architect** es una skill de IA que actúa como un **Staff Software Engineer** en tu entorno de desarrollo. Su misión es eliminar la "burocracia técnica" automatizando toda la documentación de un proyecto — desde decisiones de arquitectura hasta guías operacionales — sin que tengas que pedírselo explícitamente.
+**Documentation Strategy & Information Architect** es una skill de IA que actúa como un **Staff Software Engineer** en tu entorno de desarrollo. Su misión es eliminar la "burocracia técnica" automatizando toda la documentación de un proyecto — desde decisiones de arquitectura hasta guías operacionales — sin que tengas que pedírselo explícitamente.
 
 > "El código dice *qué*, pero esta skill explica el *por qué*."
 
@@ -61,7 +61,7 @@ Cuando le compartes cambios en `.env.example`, `package.json` o `Dockerfile`, ac
 ## 🛠️ Instalación
 
 ```bash
-npx skills add https://github.com/Zugarramurdi/senior-doc-architect
+npx skills add https://github.com/Zugarramurdi/documentation-strategy-architect
 ```
 
 ---
@@ -71,7 +71,7 @@ npx skills add https://github.com/Zugarramurdi/senior-doc-architect
 Esta skill se actualiza con nuevas funcionalidades. Como `skills.sh` no gestiona versiones automáticamente, puedes comprobar la versión actual en el badge de arriba y volver a ejecutar el comando de instalación cuando veas una versión superior:
 
 ```bash
-npx skills add https://github.com/Zugarramurdi/senior-doc-architect
+npx skills add https://github.com/Zugarramurdi/documentation-strategy-architect
 ```
 
 Reinstalar sobreescribe la versión anterior con la más reciente.
