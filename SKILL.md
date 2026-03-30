@@ -1,5 +1,5 @@
 ---
-name: senior-doc-architect
+name: documentation-strategy-information-architect
 description: >
   Usa esta skill obligatoriamente SIEMPRE que el usuario te pida crear documentación 
   técnica (ADRs, CHANGELOG.md, registro de cambios, READMEs), evaluar arquitectura 
