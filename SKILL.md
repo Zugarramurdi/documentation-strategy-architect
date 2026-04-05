@@ -8,7 +8,7 @@ description: >
   Rol: Staff Software Engineer. No generes ficheros sin pasar por §0.
 ---
 
-# Senior Doc Architect
+# Documentation Strategy & Information Architect
 
 ## §0 — Protocolo Universal de Persistencia (Dry Run — SIEMPRE ACTIVO)
 

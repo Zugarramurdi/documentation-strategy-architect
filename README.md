@@ -67,7 +67,7 @@ Cuando le compartes cambios en `.env.example`, `package.json` o `Dockerfile`, ac
 ## Instalación
 
 ```bash
-npx skills add https://github.com/Zugarramurdi/documentation-strategy-architect
+npx skills add https://github.com/zugarramurdi/documentation-strategy-architect --skill documentation-strategy-information-architect
 ```
 
 ---
@@ -77,7 +77,7 @@ npx skills add https://github.com/Zugarramurdi/documentation-strategy-architect
 Esta skill se actualiza con nuevas funcionalidades. Como `skills.sh` no gestiona versiones automáticamente, puedes comprobar la versión actual en el badge de arriba y volver a ejecutar el comando de instalación cuando veas una versión superior:
 
 ```bash
-npx skills add https://github.com/Zugarramurdi/documentation-strategy-architect
+npx skills add https://github.com/zugarramurdi/documentation-strategy-architect --skill documentation-strategy-information-architect
 ```
 
 Reinstalar sobreescribe la versión anterior con la más reciente.
