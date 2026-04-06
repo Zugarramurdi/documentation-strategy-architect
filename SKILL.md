@@ -1,5 +1,5 @@
 ---
-name: documentation-strategy-architect
+name: documentation-strategy-information-architect
 description: >
   Usa esta skill SIEMPRE que el usuario mencione: documentación técnica, ADR,
   RFC, CHANGELOG, README, diagramas C4, Mermaid, conventional commits, onboarding,
